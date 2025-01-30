@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+/* Style général pour le CV */
+.cv-container {
+    width: 80%;
+    margin: 0 auto;
+    font-family: 'Lora', serif;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Photo */
+.photo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.photo img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #2ecc71;
+}
+
+/* Informations personnelles */
+.personal-info {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.personal-info h2 {
+    font-size: 32px;
+    color: #2c3e50;
+}
+
+.personal-info p {
+    font-size: 18px;
+    color: #7f8c8d;
+}
+
+/* Sections */
+.experiences, .formations, .langues, .competences, .projets {
+    margin-top: 30px;
+}
+
+.experiences h3, .formations h3, .langues h3, .competences h3, .projets h3 {
+    font-size: 24px;
+    color: #27ae60;
+    border-bottom: 3px solid #27ae60;
+    padding-bottom: 10px;
+}
+
+.experience, .formation, .langue, .competence, .projet {
+    margin-top: 15px;
+}
+
+.experience h4, .formation h4, .projet h4 {
+    font-size: 20px;
+    color: #2980b9;
+}
+
+.experience p, .formation p, .langue p, .competence p, .projet p {
+    font-size: 16px;
+    color: #95a5a6;
+}.but {
+    display: flex;
+    justify-content: space-between; /* Espacement égal entre les éléments */
+    align-items: center;
+    gap: 10px; /* Espacement entre les boutons */
+    margin-top: 20px; /* Espacement au-dessus de la section */
+}
+
+.but a,
+.but button {
+    display: inline-block;
+    padding: 10px 20px; /* Espacement interne */
+    font-size: 16px; /* Taille de police */
+    font-weight: bold; /* Texte en gras */
+    text-align: center;
+    text-decoration: none; /* Retire le soulignement des liens */
+    border-radius: 5px; /* Coins arrondis */
+    border: none; /* Supprime les bordures */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Animation douce */
+}
+
+.but .btn-secondary {
+    background-color: #6c757d; /* Gris */
+    color: #fff; /* Blanc */
+}
+
+.but .btn-secondary:hover {
+    background-color: #5a6268; /* Gris plus foncé */
+    transform: scale(1.05); /* Léger zoom au survol */
+}
+
+.but .btn-danger {
+    background-color: #dc3545; /* Rouge */
+    color: #fff; /* Blanc */
+}
+
+.but .btn-danger:hover {
+    background-color: #c82333; /* Rouge plus foncé */
+    transform: scale(1.05); /* Léger zoom au survol */
+}
+
+.but .btn-primary {
+    background-color: #007bff; /* Bleu */
+    color: #fff; /* Blanc */
+}
+
+.but .btn-primary:hover {
+    background-color: #0056b3; /* Bleu plus foncé */
+    transform: scale(1.05); /* Léger zoom au survol */
+}
+@media print {
+    .but {
+        display: none; /* Cache la section contenant les boutons */
+    }
+}
+
+
+</style>
+<body>
+    <div class="cv-container">
+    <!-- Photo de l'étudiant -->
+    <div class="photo">
+        <img src="{{ cv.etudiant.photo.url }}" alt="Photo de {{ cv.etudiant.nom }}">
+    </div>
+
+    <!-- Informations personnelles -->
+    <div class="personal-info">
+        <h2>{{ cv.etudiant.prenom }} {{ cv.etudiant.nom }}</h2>
+        <p>Email : {{ cv.etudiant.email }}</p>
+        <p>Téléphone : {{ cv.etudiant.tel }}</p>
+        <p>Adresse : {{ cv.etudiant.adresse }}</p>
+    </div>
+
+    <!-- Expériences -->
+    <div class="cv-details">
+        <h2>Expériences professionnelles</h2>
+        {% for experience in cv.contenu.experiences %}
+            <p><strong>{{ experience.poste }}</strong> chez {{ experience.entreprise }} (du {{ experience.date_debut }} au {% if experience.date_fin %}{{ experience.date_fin }}{% else %}en cours{% endif %})</p>
+            <p>{{ experience.description }}</p>
+        {% endfor %}
+
+        <h2>Formations</h2>
+        {% for formation in cv.contenu.formations %}
+            <p><strong>{{ formation.diplome }}</strong> à {{ formation.etablissement }} (du {{ formation.date_debut }} au {% if formation.date_fin %}{{ formation.date_fin }}{% else %}en cours{% endif %})</p>
+        {% endfor %}
+
+        <h2>Langues</h2>
+        {% for langue in cv.contenu.langues %}
+            <p><strong>{{ langue.libelle }}</strong>: Niveau {{ langue.niveau }}</p>
+        {% endfor %}
+
+        <h2>Compétences</h2>
+        {% for competence in cv.contenu.competences %}
+            <p><strong>{{ competence.libelle }}</strong>: Niveau {{ competence.niveau }}</p>
+        {% endfor %}
+
+        <h2>Projets</h2>
+        {% for projet in cv.contenu.projets %}
+            <p><strong>{{ projet.titre }}</strong> (du {{ projet.date_debut }} au {% if projet.date_fin %}{{ projet.date_fin }}{% else %}en cours{% endif %})</p>
+            <p>{{ projet.description }}</p>
+        {% endfor %}
+    </div>
+</div>
+    <div class="but">
+<a href="{% url 'mes_cvs' %}" class="btn btn-secondary">Retour à Mes CVs</a>
+    <form method="POST" action="{% url 'supprimer_cv' cv.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Supprimer ce CV</button>
+    </form>
+    <a href="{% url 'telecharger_cv' cv.id 'style4' %}" class="btn btn-primary">Télécharger</a>
+        </div>
+</body>
+</html>

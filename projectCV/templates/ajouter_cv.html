@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un CV</title>
+</head>
+<style>
+  /* Style général */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+header {
+    background-color: #333; /* Noir */
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 1.5rem;
+}
+
+.card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.5rem;
+    color: #333; /* Noir */
+}
+
+.card p {
+    margin: 0;
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Lien "Sélectionner les éléments pour mon CV" */
+a {
+    color: #333;  /* Noir */
+    font-weight: bold;  /* Texte en gras */
+    font-size: 1.2em;  /* Taille de la police un peu plus grande */
+    text-decoration: none;  /* Supprime le soulignement */
+    border-bottom: 2px solid transparent;  /* Bordure inférieure invisible */
+    transition: all 0.3s ease;  /* Transition pour les effets */
+}
+
+a:hover {
+    color: #fff;  /* Texte blanc au survol */
+    background-color: #333;  /* Fond noir au survol */
+    padding: 5px 10px;  /* Ajout d'un peu de padding au survol */
+    border-radius: 5px;  /* Bordure arrondie */
+    border-bottom: 2px solid #333;  /* Bordure noire visible au survol */
+}
+
+a:focus {
+    outline: none;  /* Supprimer le contour de focus */
+    color: #fff;  /* Texte blanc */
+    background-color: #333;  /* Fond noir */
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+a:active {
+    background-color: #222;  /* Couleur plus foncée lors du clic */
+}
+
+</style>
+<body>
+    <header>
+        <h1>Ajouter un CV</h1>
+    </header>
+    <main>
+        <div class="container">
+            <div class="card">
+                <a href="{% url 'etudiant_form' %}">
+                    <h3>Informations personnelles</h3>
+                    <p>Complétez vos informations de base (nom, prénom, email, etc.).</p>
+                </a>
+            </div>
+            <div class="card">
+                <a href="{% url 'ajouter_experience' %}">
+                    <h3>Ajouter une expérience</h3>
+                    <p>Renseignez vos expériences professionnelles passées.</p>
+                </a>
+            </div>
+            <div class="card">
+                <a href="{% url 'ajouter_formation' %}">
+                    <h3>Ajouter une formation</h3>
+                    <p>Ajoutez vos diplômes et formations académiques.</p>
+                </a>
+            </div>
+            <div class="card">
+                <a href="{% url 'ajouter_langue' %}">
+                    <h3>Ajouter une langue</h3>
+                    <p>Déclarez vos compétences linguistiques.</p>
+                </a>
+            </div>
+            <div class="card">
+                <a href="{% url 'ajouter_competence' %}">
+                    <h3>Ajouter une compétence</h3>
+                    <p>Indiquez vos compétences techniques et professionnelles.</p>
+                </a>
+            </div>
+            <div class="card">
+                <a href="{% url 'ajouter_projet' %}">
+                    <h3>Ajouter un projet</h3>
+                    <p>Présentez vos projets réalisés et vos réalisations.</p>
+                </a>
+            </div>
+            <p><a href="{% url 'selection_elements' %}">Sélectionner les éléments pour mon CV</a></p>
+        </div>
+    </main>
+</body>
+</html>

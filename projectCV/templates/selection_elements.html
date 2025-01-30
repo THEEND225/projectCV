@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sélectionner les éléments pour le CV</title>
+</head>
+<style>
+ /* Général */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333; /* Noir */
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+h2 {
+    font-size: 1.2em;
+    margin: 20px 0;
+    color: #333; /* Noir */
+}
+
+/* Formulaire */
+form {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+}
+
+/* Sections des éléments */
+section {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 1em;
+    margin: 8px 0;
+    color: #333; /* Noir */
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Bouton de soumission */
+button {
+    background-color: #333; /* Noir */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #222; /* Noir plus foncé */
+}
+
+/* Lien */
+a {
+    color: #333; /* Noir */
+    text-decoration: none;
+    font-size: 1.1em;
+    margin-top: 20px;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #fff; /* Blanc au survol */
+    background-color: #333; /* Fond noir au survol */
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Style responsive pour petits écrans */
+@media (max-width: 768px) {
+    form {
+        padding: 15px;
+        margin: 15px;
+    }
+
+    h2 {
+        font-size: 1em;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        font-size: 1.1em;
+    }
+}
+
+</style>
+<body>
+    <header>
+        <h1>Sélectionner les éléments pour votre CV</h1>
+    </header>
+
+    <form method="POST">
+    {% csrf_token %}
+
+    <h2>Expériences professionnelles</h2>
+    {% for experience in experiences %}
+        <label>
+            <input type="checkbox" name="experiences" value="{{ experience.id }}">
+            {{ experience.poste }} - {{ experience.entreprise }}
+        </label><br>
+    {% endfor %}
+
+    <h2>Formations</h2>
+    {% for formation in formations %}
+        <label>
+            <input type="checkbox" name="formations" value="{{ formation.id }}">
+            {{ formation.diplome }} - {{ formation.etablissement }}
+        </label><br>
+    {% endfor %}
+
+    <h2>Langues</h2>
+    {% for langue in langues %}
+        <label>
+            <input type="checkbox" name="langues" value="{{ langue.id }}">
+            {{ langue.libelle }} ({{ langue.niveau }})
+        </label><br>
+    {% endfor %}
+
+    <h2>Compétences</h2>
+    {% for competence in competences %}
+        <label>
+            <input type="checkbox" name="competences" value="{{ competence.id }}">
+            {{ competence.libelle }} ({{ competence.niveau }})
+        </label><br>
+    {% endfor %}
+
+    <h2>Projets</h2>
+    {% for projet in projets %}
+        <label>
+            <input type="checkbox" name="projets" value="{{ projet.id }}">
+            {{ projet.titre }}
+        </label><br>
+    {% endfor %}
+
+    <!-- Bouton "Supprimer tous" -->
+    <button type="submit" name="action" value="remove_all">Supprimer tous les éléments sélectionnés</button>
+
+    <button type="submit" name="action" value="save">Suivant</button>
+
+        <a href="{% url 'ajouter_cv' %}">
+    <button type="button">Retour</button>
+        </a>
+
+    </form>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter une Compétence</title>
+    <link rel="stylesheet" href="{% static 'css/formulaire.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Ajouter/Modifier une Compétence</h1>
+    </header>
+    <main>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Enregistrer</button>
+        </form>
+    </main>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    /* Général */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 20px;
+    text-align: center;
+}
+
+/* En-tête */
+header {
+    background-color: #333; /* Noir */
+    color: white;
+    padding: 15px 0;
+    margin-bottom: 20px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+/* Section des liens */
+.style-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.style-link {
+    color: #333; /* Noir */
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 15px 25px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.style-link:hover {
+    background-color: #333; /* Noir */
+    color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.style-link:active {
+    background-color: #222; /* Noir plus foncé */
+}
+
+@media (max-width: 768px) {
+    .style-options {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .style-link {
+        width: 80%;
+    }
+}
+
+</style>
+<body>
+<div class="container">
+        <header>
+            <h1>Choisir le style de votre CV</h1>
+            <p>Veuillez sélectionner un style pour générer votre CV.</p>
+        </header>
+
+        <div class="style-options">
+            <!-- Lien vers le premier style -->
+            <a href="{% url 'appercu' cv_id 'style1' %}" class="style-link">Style Professionnel</a>
+
+            <!-- Lien vers le deuxième style -->
+            <a href="{% url 'appercu' cv_id 'style2' %}" class="style-link">Style Créatif</a>
+
+            <!-- Lien vers le troisième style -->
+            <a href="{% url 'appercu' cv_id 'style3' %}" class="style-link">Style Moderne</a>
+
+            <!-- Lien vers le quatrième style -->
+            <a href="{% url 'appercu' cv_id 'style4' %}" class="style-link">Style Minimaliste</a>
+        </div>
+    </div>
+</body>
+</html>

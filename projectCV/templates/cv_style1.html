@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+
+  body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 15px 0;
+        }
+
+        header nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        header nav ul li {
+            margin: 0 20px;
+        }
+
+        header nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        header nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #2980b9;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-top: 30px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .photo-etudiant img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            background-color: #2980b9;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #3498db;
+        }
+
+        .btn-danger {
+            background-color: #e74c3c;
+        }
+
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-secondary {
+            background-color: #95a5a6;
+        }
+
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+
+        .item {
+            margin-bottom: 20px;
+        }
+
+        .item strong {
+            color: #34495e;
+        }
+    .but {
+    display: flex;
+    justify-content: space-between; /* Espacement égal entre les éléments */
+    align-items: center;
+    gap: 10px; /* Espacement entre les boutons */
+    margin-top: 20px; /* Espacement au-dessus de la section */
+}
+
+.but a,
+.but button {
+    display: inline-block;
+    padding: 10px 20px; /* Espacement interne */
+    font-size: 16px; /* Taille de police */
+    font-weight: bold; /* Texte en gras */
+    text-align: center;
+    text-decoration: none; /* Retire le soulignement des liens */
+    border-radius: 5px; /* Coins arrondis */
+    border: none; /* Supprime les bordures */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Animation douce */
+}
+
+.but .btn-secondary {
+    background-color: #6c757d; /* Gris */
+    color: #fff; /* Blanc */
+}
+
+.but .btn-secondary:hover {
+    background-color: #5a6268; /* Gris plus foncé */
+    transform: scale(1.05); /* Léger zoom au survol */
+}
+
+.but .btn-danger {
+    background-color: #dc3545; /* Rouge */
+    color: #fff; /* Blanc */
+}
+
+.but .btn-danger:hover {
+    background-color: #c82333; /* Rouge plus foncé */
+    transform: scale(1.05); /* Léger zoom au survol */
+}
+
+.but .btn-primary {
+    background-color: #007bff; /* Bleu */
+    color: #fff; /* Blanc */
+}
+
+.but .btn-primary:hover {
+    background-color: #0056b3; /* Bleu plus foncé */
+    transform: scale(1.05); /* Léger zoom au survol */
+}
+@media print {
+    .but {
+        display: none; /* Cache la section contenant les boutons */
+    }
+}
+
+    </style>
+
+</style>
+<body>
+    <div class="container">
+
+    <!-- Affichage de la photo et des informations de contact de l'étudiant -->
+    <div class="photo-etudiant">
+        <img src="{{ cv.etudiant.photo.url }}" alt="{{ cv.etudiant.nom }} {{ cv.etudiant.prenom }}" class="img-thumbnail" width="150">
+        <p><strong>Étudiant:</strong> {{ cv.etudiant.prenom }} {{ cv.etudiant.nom }}</p>
+        <p><strong>Email:</strong> {{ cv.etudiant.email }}</p>
+        <p><strong>Téléphone:</strong> {{ cv.etudiant.tel }}</p>
+        <p><strong>Adresse:</strong> {{ cv.etudiant.adresse }}</p>
+    </div>
+
+    <div class="cv-details">
+        <!-- Expériences -->
+        <h2>Expériences</h2>
+        {% for experience in cv.contenu.experiences %}
+            <p><strong>{{ experience.poste }}</strong> chez {{ experience.entreprise }} (du {{ experience.date_debut }} au {% if experience.date_fin %}{{ experience.date_fin }}{% else %}en cours{% endif %})</p>
+            <p>{{ experience.description }}</p>
+        {% endfor %}
+
+        <!-- Formations -->
+        <h2>Formations</h2>
+        {% for formation in cv.contenu.formations %}
+            <p><strong>{{ formation.diplome }}</strong> à {{ formation.etablissement }} (du {{ formation.date_debut }} au {% if formation.date_fin %}{{ formation.date_fin }}{% else %}en cours{% endif %})</p>
+        {% endfor %}
+
+        <!-- Langues -->
+        <h2>Langues</h2>
+        {% for langue in cv.contenu.langues %}
+            <p><strong>{{ langue.libelle }}</strong>: Niveau {{ langue.niveau }}</p>
+        {% endfor %}
+
+        <!-- Compétences -->
+        <h2>Compétences</h2>
+        {% for competence in cv.contenu.competences %}
+            <p><strong>{{ competence.libelle }}</strong>: Niveau {{ competence.niveau }}</p>
+        {% endfor %}
+
+        <!-- Projets -->
+        <h2>Projets</h2>
+        {% for projet in cv.contenu.projets %}
+            <p><strong>{{ projet.titre }}</strong> (du {{ projet.date_debut }} au {% if projet.date_fin %}{{ projet.date_fin }}{% else %}en cours{% endif %})</p>
+            <p>{{ projet.description }}</p>
+        {% endfor %}
+    </div>
+</div>
+  <div class="but">
+<a href="{% url 'mes_cvs' %}" class="btn btn-secondary">Retour à Mes CVs</a>
+    <form method="POST" action="{% url 'supprimer_cv' cv.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Supprimer ce CV</button>
+    </form>
+    <a href="{% url 'telecharger_cv' cv.id 'style1' %}" class="btn btn-primary">Télécharger</a>
+        </div>
+
+</body>
+</html>

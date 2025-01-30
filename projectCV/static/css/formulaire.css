@@ -1,0 +1,117 @@
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;  /* Fond blanc pour le corps */
+    color: #333;  /* Texte sombre pour un bon contraste */
+}
+
+/* En-tête */
+header {
+    background-color: #333;  /* Fond sombre pour l'en-tête */
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* Conteneur du formulaire */
+form {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f9f9f9;  /* Fond clair pour le formulaire */
+    border: 1px solid #ddd;  /* Bordure douce et subtile */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Ombre douce autour du formulaire */
+}
+
+/* Titres du formulaire */
+form h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #4CAF50;  /* Un vert léger pour les titres */
+    text-align: center;
+}
+
+/* Champs de formulaire */
+form label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #333;  /* Texte des labels en gris sombre */
+}
+
+form input,
+form textarea,
+form select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;  /* Bordure claire et agréable */
+    border-radius: 6px;
+    font-size: 1rem;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);  /* Ombre légère pour les champs */
+    background-color: #fff;  /* Fond blanc pour les champs */
+    color: #333;  /* Texte en gris foncé dans les champs */
+    transition: border-color 0.3s;
+}
+
+/* Focus sur les champs de saisie */
+form input:focus,
+form textarea:focus,
+form select:focus {
+    border-color: #4CAF50;  /* Accent vert lors du focus */
+    outline: none;
+}
+
+/* Bouton d'envoi */
+form button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+form button:active {
+    transform: scale(0.98);
+}
+
+/* Messages d'erreur ou de succès */
+.form-message {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.form-message.success {
+    color: #4CAF50;
+}
+
+.form-message.error {
+    color: #f44336;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    form {
+        padding: 1.5rem;
+    }
+
+    form button {
+        font-size: 0.9rem;
+    }
+}
